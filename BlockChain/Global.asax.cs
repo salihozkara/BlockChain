@@ -28,17 +28,24 @@ namespace BlockChain
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
 
-            process = new Process();
-            process.StartInfo.FileName = "node.exe";
-            var directoryInfo = Directory.GetParent(Server.MapPath("~"))?.Parent;
-            if (directoryInfo != null)
+            try
             {
-                var path = directoryInfo?.FullName + "/NodejsAPI/app.js";
-                process.StartInfo.Arguments = path;
-            }
+                process = new Process();
+                process.StartInfo.FileName = "node.exe";
+                var directoryInfo = Directory.GetParent(Server.MapPath("~"))?.Parent;
+                if (directoryInfo != null)
+                {
+                    var path = directoryInfo?.FullName + "/NodejsAPI/app.js";
+                    process.StartInfo.Arguments = path;
+                }
 
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-            process.Start();
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+                process.Start();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
             
         }
 
